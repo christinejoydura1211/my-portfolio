@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+   <style>
+               /* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+:root {
+    --primary-color: #1e435c;
+    --accent-color:#1e435c;
+    --text-color: #ffffff;
+    --light-bg: #ecf0f1;
+    --white: #ffffff;
+    --panel-width: 280px;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: clamp(14px, 2vw, 16px);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    background-color: var(--light-bg);
+    display: flex;
+    overflow-x: hidden;
+}
+
+/* Side Panel */
+.side-panel {
+    width: var(--panel-width);
+    height: 100vh;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+    color: var(--white);
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.panel-header {
+    padding: 40px 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.panel-profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    object-fit: cover;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.panel-profile-img:hover {
+    transform: scale(1.05);
+    border-color: var(--accent-color);
+}
+
+.panel-header h2 {
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.panel-nav {
+    padding: 40px 0;
+}
+
+.panel-nav ul {
+    list-style: none;
+}
+
+.panel-nav li {
+    margin: 0;
+}
+
+.panel-nav .nav-link {
+    display: block;
+    padding: clamp(12px, 1.5vw, 15px) 25px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: clamp(14px, 1vw, 16px);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+    position: relative;
+}
+
+.panel-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border-left-color: var(--accent-color);
+    padding-left: 35px;
+}
+
+.panel-nav .nav-link.active {
+    background-color: var(--accent-color);
+    color: var(--white);
+    border-left-color: var(--white);
+    padding-left: 35px;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: var(--panel-width);
+    width: calc(100% - var(--panel-width));
+    min-height: 100vh;
+}
+
+.section {
+    padding: 60px 40px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section {
+    background: linear-gradient(135deg, #1e435c 0%, #1b1027 100%);
+    color: var(--white);
+}
+
+.section-content {
+    max-width: 800px;
+    width: 100%;
+}
+
+/* Home Section - Profile Image */
+.home-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1200px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.profile-image-wrapper {
+    flex-shrink: 0;
+}
+
+.profile-image {
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+}
+
+.section-content {
+    max-width: 800px;
+    width: 100%;
+}
+
+/* Ensure section content centers and headings align left */
+.section-content {
+    margin: 0 auto;
+}
+
+#certificates .section-content {
+    margin: 0;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+#gallery .section-content {
+    margin: 0;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+#certificates .about-grid.certificates {
+    justify-items: start;
+    justify-content: start;
+    grid-template-columns: repeat(3, minmax(320px, 1fr));
+    gap: 48px;
+    width: 100%;
+}
+
+#projects .section-content {
+    margin: 0;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.section h1 {
+    text-align: left;
+}
+
+
+.section h1 {
+    font-size: clamp(32px, 5vw, 48px);
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.section p {
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.6;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+/* Buttons */
+.cta-button {
+    padding: clamp(12px, 2vw, 12px) clamp(30px, 4vw, 30px);
+    font-size: clamp(14px, 1.5vw, 16px);
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--accent-color);
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cta-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+/* Work Grid */
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: clamp(20px, 3vw, 30px);
+    margin-top: 40px;
+}
+
+.work-item {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.work-placeholder {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Carousel Styles */
+    
+/* Wrapper - Projects in two columns */
+.carousel-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Individual Carousel */
+.carousel-container {
+    width: 100%;
+    height: 50vh;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Moving Track */
+.carousel-track {
+    display: flex;
+    width: 180%;
+    height: 100%;
+    animation: slide1 10s infinite linear;
+}
+
+/* Carousel 2 - Different Animation */
+.carousel-wrapper .carousel-container:nth-child(2) .carousel-track {
+    animation: slide2 15s infinite linear;
+    animation-delay: 1s;       /* Starts at different time */
+}
+
+/* Individual Slide */
+.carousel-item {
+    width: 33.33%;             /* 100% / 3 items */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Image Centering & Fitting */
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Keyframes for Carousel 1 */
+@keyframes slide1 {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-200%); }
+}
+
+/* Keyframes for Carousel 2 */
+@keyframes slide2 {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-200%); }
+}
+.carousel-container:hover .carousel-track {
+    animation-play-state: paused;
+}
+/* Fast carousel */
+.carousel-container:first-child .carousel-track {
+    animation-duration: 10s;
+}
+
+/* Slow carousel */
+.carousel-container:last-child .carousel-track {
+    animation-duration: 10s;
+}
+
+/* Responsive: stack to single column on small screens */
+@media (max-width: 600px) {
+    .certs { grid-template-columns: 1fr; }
+}
+
+.work-item h3 {
+    padding: 20px;
+    font-size: clamp(16px, 2vw, 20px);
+    margin-bottom: 10px;
+}
+
+.work-item p {
+    padding: 0 20px 20px;
+    font-size: clamp(13px, 1.5vw, 14px);
+    color: #666;
+    margin: 0;
+}
+
+/* Contact Form */
+.contact-form {
+    margin-top: 40px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+/* About Grid */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(30px, 4vw, 40px);
+    margin-top: 40px;
+}
+
+/* Certificates should show three columns */
+.about-grid.certificates {
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
+    gap: clamp(30px, 4vw, 48px);
+}
+
+.about-grid.certificates .about-item {
+    padding: clamp(24px, 3vw, 36px);
+}
+
+.about-grid.certificates img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+#gallery .about-grid.certificates {
+    gap: clamp(30px, 4vw, 48px);
+}
+
+#gallery .gallery-item {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    overflow: hidden;
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#gallery .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.about-item {
+    background: var(--primary-color);
+    padding: clamp(20px, 3vw, 30px);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.about-item h3 {
+    font-size: clamp(18px, 2.5vw, 22px);
+    margin-bottom: 20px;
+    color: var(--light-bg);
+}
+
+.about-item ul {
+    list-style: none;
+}
+
+/* Skills list - small badge/grid inside About Me */
+.skills-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+}
+.skills-list li {
+    list-style: none;
+    background: rgba(255,255,255,0.04);
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--light-bg);
+}
+
+.about-item li {
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: clamp(14px, 1.5vw, 16px);
+}
+
+.about-item li:before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--light-bg);
+    font-weight: bold;
+} .certificate-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, auto);
+      gap: 20px;
+      padding: 20px;
+    }
+    .certificate {
+      border: 2px solid #333;
+      padding: 10px;
+      text-align: center;
+      background-color: #f9f9f9;
+    }
+    .certificate img {
+       width: 300px;      /* fixed width */
+      height: 200px;     /* fixed height */
+      object-fit: cover; /* crop to fill box */
+      display: block;
+      margin: 0 auto;
+    }
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-list li {
+    position: relative;
+    padding-left: 36px;
+    padding-bottom: 10px;
+    font-size: clamp(14px, 1.5vw, 16px);
+}
+
+.contact-list li:before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: var(--light-bg);
+    content: "";
+}
+
+.contact-list li.contact-email:before {
+    content: "✉";
+}
+
+.contact-list li.contact-phone:before {
+    content: "☎";
+}
+
+.contact-list li.contact-location:before {
+    content: "📍";
+}
+
+.contact-list a {
+    color: var(--white);
+    text-decoration: none;
+}
+
+.contact-list a:hover {
+    text-decoration: underline;
+}
+ 
+
+    /* Responsive: stack to single column on small screens */
+    @media (max-width: 600px) {
+        .certs { grid-template-columns: 1fr; grid-template-rows: none; min-height: 0; }
+        .cert img{height:160px}
+    }
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #2980b9;
+}
+
+/* Responsive Design - Large Desktop (1200px and up) */
+@media (min-width: 1200px) {
+    :root {
+        --panel-width: 300px;
+    }
+
+    .section {
+        padding: 80px 60px;
+    }
+
+    .section h1 {
+        font-size: clamp(40px, 5vw, 48px);
+    }
+
+    .section p {
+        font-size: clamp(16px, 2vw, 20px);
+    }
+
+    .work-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+    }
+}
+
+/* Tablet (768px - 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    :root {
+        --panel-width: 250px;
+    }
+
+    .side-panel {
+        width: var(--panel-width);
+    }
+
+    .main-content {
+        margin-left: var(--panel-width);
+        width: calc(100% - var(--panel-width));
+    }
+
+    .section {
+        padding: 50px 35px;
+    }
+
+    .section h1 {
+        font-size: clamp(32px, 4vw, 40px);
+    }
+
+    .section p {
+        font-size: clamp(15px, 1.8vw, 18px);
+    }
+
+    .work-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .panel-nav .nav-link {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+
+    .home-container {
+        gap: 40px;
+    }
+
+    .profile-image {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+/* Mobile Landscape & Small Tablet (600px - 767px) */
+@media (max-width: 767px) {
+    :root {
+        --panel-width: 100%;
+    }
+
+    body {
+        flex-direction: column;
+    }
+
+    .side-panel {
+        width: 100%;
+        height: auto;
+        position: relative;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .panel-header {
+        padding: 25px 20px;
+    }
+
+    .panel-header h2 {
+        font-size: clamp(20px, 5vw, 26px);
+    }
+
+    .panel-nav {
+        display: flex;
+        padding: 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .panel-nav ul {
+        display: flex;
+        list-style: none;
+        width: 100%;
+    }
+
+    .panel-nav li {
+        flex-shrink: 0;
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .panel-nav .nav-link {
+        padding: 15px 12px;
+        font-size: 13px;
+        text-align: center;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+    }
+
+    .panel-nav .nav-link:hover,
+    .panel-nav .nav-link.active {
+        border-left: none;
+        border-bottom: 3px solid var(--accent-color);
+        padding-left: 12px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .section {
+        padding: clamp(25px, 5vw, 35px);
+        min-height: auto;
+    }
+
+    .section h1 {
+        font-size: clamp(24px, 6vw, 32px);
+    }
+
+    .section p {
+        font-size: clamp(14px, 4vw, 16px);
+    }
+
+    .work-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .carousel-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .about-grid.certificates {
+        grid-template-columns: 1fr;
+    }
+
+    .about-item {
+        padding: 20px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .cta-button {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 14px;
+    }
+
+    .home-container {
+        gap: 30px;
+        flex-direction: column;
+    }
+
+    .profile-image {
+        width: 220px;
+        height: 220px;
+    }
+}
+
+/* Small Mobile (up to 599px) */
+@media (max-width: 599px) {
+    :root {
+        --panel-width: 100%;
+    }
+
+    .section {
+        padding: clamp(20px, 4vw, 25px);
+        min-height: 100vh;
+    }
+
+    .section h1 {
+        font-size: clamp(20px, 7vw, 28px);
+        margin-bottom: 15px;
+    }
+
+    .section p {
+        font-size: clamp(13px, 3.5vw, 15px);
+        margin-bottom: 20px;
+    }
+
+    .section-content {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .panel-header {
+        padding: 20px 15px;
+    }
+
+    .panel-header h2 {
+        font-size: 22px;
+    }
+
+    .panel-nav li {
+        flex: 1;
+        min-width: 100px;
+    }
+
+    .panel-nav .nav-link {
+        padding: 12px 8px;
+        font-size: 12px;
+    }
+
+    .work-grid {
+        gap: 15px;
+    }
+
+    .work-placeholder {
+        height: 150px;
+        font-size: 14px;
+    }
+
+    .work-item h3 {
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .work-item p {
+        padding: 0 15px 15px;
+        font-size: 13px;
+    }
+
+    .contact-form {
+        margin-top: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 4px;
+    }
+
+    .cta-button {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 13px;
+        border-radius: 4px;
+    }
+
+    .about-item {
+        padding: 15px;
+    }
+
+    .about-item h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .about-item li {
+        font-size: 14px;
+        padding: 6px 0;
+        padding-left: 18px;
+    }
+
+    .home-container {
+        gap: 20px;
+        flex-direction: column;
+    }
+
+    .profile-image {
+        width: 180px;
+        height: 180px;
+        border-radius: 15px;
+    }
+}
+
+/* Extra Small Mobile (up to 375px) */
+@media (max-width: 375px) {
+    :root {
+        --primary-color: #2c3e50;
+        --accent-color: #3498db;
+        --text-color: #333;
+        --light-bg: #ecf0f1;
+        --white: #ffffff;
+        --panel-width: 100%;
+    }
+
+    .section {
+        padding: 15px;
+        min-height: auto;
+    }
+
+    .section h1 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .section p {
+        font-size: 13px;
+        margin-bottom: 15px;
+    }
+
+    .panel-header {
+        padding: 15px 10px;
+    }
+
+    .panel-header h2 {
+        font-size: 18px;
+    }
+
+    .panel-nav .nav-link {
+        padding: 10px 6px;
+        font-size: 11px;
+    }
+
+    .work-placeholder {
+        height: 120px;
+        font-size: 12px;
+    }
+
+    .work-item h3 {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .work-item p {
+        padding: 0 12px 12px;
+        font-size: 12px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .cta-button {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    .about-item {
+        padding: 12px;
+    }
+
+    .about-item h3 {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .home-container {
+        gap: 15px;
+    }
+
+    .profile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 12px;
+    }
+}
+
+/* Landscape orientation for mobile devices */
+@media (max-height: 500px) and (orientation: landscape) {
+    .section {
+        min-height: auto;
+        padding: 25px 20px;
+    }
+
+    .panel-nav {
+        max-height: 60px;
+    }
+
+    .panel-header {
+        padding: 15px 20px;
+    }
+}
+    .panel-header {
+        padding: 15px 20px;
+    }
+
+#gallery .about-grid.certificates .about-item img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+}
+
+.gallery-item{
+    background: var(--primary-color);
+    padding: clamp(20px, 3vw, 30px);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+   </style>
+
+    <body>
+      <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dura - Online Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Side Panel Navigation -->
+    <aside class="side-panel">
+        <div class="panel-header">
+            <img src="images/profile.jpeg" alt="Dura" class="panel-profile-img">
+            <h2>Christine Joy V. Dura</h2>
+        </div>
+        <nav class="panel-nav">
+            <ul>
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#projects" class="nav-link">Projects </a></li>
+                <li><a href="#certificates" class="nav-link">Certificates</a></li>
+                 <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#about" class="nav-link">About Me</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section">
+            <div class="home-container">
+                <div class="profile-image-wrapper">
+                    <img src="images/profile.jpeg" alt="Dura " class="profile-image">
+                </div>
+                <div class="section-content">
+                    <h1>Hi! Welcome to My Portfolio</h1>
+                    <p> I'm Christine Joy V. Dura,I am good at streamlining processes and seeing projects through to completion because I have a strong sense of responsibility.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Section -->
+        <section id="projects" class="section">
+            <div class="section-content">
+                <h1>Projects Developed</h1>
+                <p>Explore my latest projects and creative endeavors.</p>
+               <div class="carousel-wrapper">
+  <!-- Carousel 1 -->
+  <div class="carousel-container">
+    <div class="carousel-track">
+      <div class="carousel-item">
+        <img src="images/work1.jpg" alt="Slide 1">
+      </div>
+      <div class="carousel-item">
+        <img src="images/work2.jpg" alt="Slide 2">
+      </div>
+      <div class="carousel-item">
+       <img src="images/work3.jpg" alt="Slide 3">
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel 2 -->
+   <div class="carousel-container">
+    <div class="carousel-track">
+      <div class="carousel-item">
+        <img src="images/m1.jpg" alt="Slide 1">
+      </div>
+      <div class="carousel-item">
+        <img src="images/m2.jpg" alt="Slide 2">
+      </div>
+      <div class="carousel-item">
+       <img src="images/m3.jpg" alt="Slide 3">
+      </div>
+      <div class="carousel-item">
+       <img src="images/w1.jpg" alt="Slide 3">
+      </div>
+      <div class="carousel-item">
+       <img src="images/w2.jpg" alt="Slide 3">
+      </div>
+    </div>
+  </div>
+  
+  <!-- Carousel 3-->
+   <div class="carousel-container">
+    <div class="carousel-track">
+      <div class="carousel-item">
+        <img src="images/p1.jpg" alt="Slide 1">
+      </div>
+      <div class="carousel-item">
+        <img src="images/p2.jpg" alt="Slide 2">
+      </div>
+     
+    </div>
+  </div>
+</div>
+    </div>
+                   
+        
+</section>
+         <!-- Certificates Section -->
+        <section id="certificates" class="section">
+           <div class="section-content">
+                <h1>Certificates</h1>
+                  <div class="about-grid certificates">
+                    <div class="about-item">
+                      <img src="images/cert2.jpg" alt="Certificate 2" style="max-width:100%;height:auto;">
+                    </div>
+                    <div class="about-item">
+                      <img src="images/cert1.jpg" alt="Certificate 1" style="max-width:100%;height:auto;">
+                    </div>
+                    
+                    <div class="about-item">
+                      <img src="images/cert3.jpg" alt="Certificate 3" style="max-width:100%;height:auto;">
+                    </div>
+                    <div class="about-item">
+                      <img src="images/cert4.jpg" alt="Certificate 4" style="max-width:100%;height:auto;">
+                    </div>
+                       <div class="about-item">
+                      <img src="images/c1.jpg" alt="Certificate 4" style="max-width:100%;height:auto;">
+                    </div>
+                       <div class="about-item">
+                      <img src="images/c2.jpg" alt="Certificate 4" style="max-width:100%;height:auto;">
+                    </div>
+                       <div class="about-item">
+                      <img src="images/c3.jpg" alt="Certificate 4" style="max-width:100%;height:auto;">
+                    </div>
+                    <div class="about-item">
+                      <img src="images/tp1.jpg" alt="Training Program 1" style="max-width:100%;height:auto;">
+                    </div>
+                     <div class="about-item">
+                      <img src="images/tp2.jpg" alt="Training Program 2" style="max-width:100%;height:auto;">
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+    <!-- Gallery Section -->
+        <section id="gallery" class="section">
+            <div class="section-content">
+                <h1>Gallery</h1>
+                <p>A collection of moments and memories captured in images.</p>
+                <div class="about-grid certificates">
+                    <div class="gallery-item">
+                      <img src="gallery/g1.jpg" alt="Gallery Image 1">
+                    </div>
+                    <div class="gallery-item">
+                      <img src="gallery/g2.jpg" alt="Gallery Image 2">
+                    </div>
+                    <div class="gallery-item">
+                      <img src="gallery/g3.jpg" alt="Gallery Image 3">
+                    </div>
+                    <div class="gallery-item">
+                      <img src="gallery/g4.jpg" alt="Gallery Image 4">
+                    </div>
+                    <div class="gallery-item">
+                      <img src="gallery/g5.jpg" alt="Gallery Image 5">
+                    </div>
+                    <div class="gallery-item">
+                      <img src="gallery/g6.jpg" alt="Gallery Image 6">
+                    </div>
+                    <div class="gallery-item">
+                      <img src="gallery/g7.jpg" alt="Gallery Image 7">
+                    </div>
+                    <div class="gallery-item">
+                      <img src="gallery/g8.jpg" alt="Gallery Image 8">
+                    </div>
+                    <div class="gallery-item">
+                      <img src="gallery/g9.jpg" alt="Gallery Image 9">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="section-content">
+                <h1>Get In Touch</h1>
+                <p>I'd love to hear from you. Feel free to reach out!</p>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="section">
+            <div class="section-content">
+                <h1>About Me</h1>
+                <p>An accomplished professional with project management, and computer abilities. I am good at streamlining processes and seeing projects through to completion because I have a strong sense of responsibility. I'm looking for a job where I can help your company reach its strategic goals by using my experience and skills.</p>
+                <div class="about-grid">
+                    <div class="about-item">
+                        <h3>Skills</h3>
+                        <ul class="skills-list">
+                            <li>UI/UX Design</li>
+                            <li>Web Development</li>
+                            <li>Graphic Design</li>
+                            <li>Project Management</li>
+                        </ul>
+                    </div>
+                    <div class="about-item">
+                        <h3>Contact</h3>
+                        <ul class="contact-list">
+                            <h4>Email: <a href="mailto:your.christinedura890@gmail.com"  style="color: #ffffff;">christinedura890@gmail.com</a></h4><br>
+                            <h4>Phone: <a href="tel:+639452118784"  style="color: #ffffff;">+639452118784</a></h4><br>
+                            <h4>Location: Purok 3, Gala-gala, San Vicente, Panabo City</h4><br>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+</body>
+</html>
